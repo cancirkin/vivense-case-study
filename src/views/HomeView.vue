@@ -1,17 +1,16 @@
 <template>
-  <hello-world />
+  <button @click="changeLocale">change</button>
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
-
 export default {
   name: "HomePage",
 
-  components: {
-    HelloWorld,
+  methods: {
+    changeLocale() {
+      console.log(this.$i18n.locale);
+    },
   },
-
   mounted() {
     this.$store.dispatch("getProductsEn");
   },

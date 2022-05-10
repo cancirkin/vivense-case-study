@@ -1,23 +1,39 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import ErrorView from "../views/ErrorView.vue";
+import i18n from "../locales/index";
+import App from "../App.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    redirect: `/${i18n.locale}`,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/:locale(en|tr)",
+    name: "Home",
+    component: App,
+    children: [
+      {
+        path: "",
+        name: "Home",
+        component: HomeView,
+      },
+      {
+        path: "about",
+        name: "About",
+        component: AboutView,
+      },
+    ],
+  },
+  {
+    path: "*",
+    name: "Error",
+    component: ErrorView,
   },
 ];
 
