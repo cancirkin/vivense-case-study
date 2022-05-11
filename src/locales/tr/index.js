@@ -1,5 +1,5 @@
 export default {
-  message: {
-    hello: "merhaba",
+  header: {
+    title: "Ürün listeleme Uygulaması",
   },
 };

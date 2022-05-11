@@ -1,10 +1,8 @@
 import API from "./AxiosConfig";
+import i18n from "../locales/index";
 
 export default {
-  getProductsEn() {
-    return API().get("/en_product");
-  },
-  getProductsTr() {
-    return API().get("/tr_product");
+  getProducts() {
+    return API().get(`/${i18n.locale}_product`);
   },
 };

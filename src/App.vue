@@ -1,5 +1,6 @@
 <template>
-  <v-app>
+  <v-app id="inspire">
+    <header-navigation></header-navigation>
     <v-main>
       <router-view />
     </v-main>
@@ -7,7 +8,9 @@
 </template>
 
 <script>
+import HeaderNavigation from "./components/HeaderNavigation.vue";
 export default {
+  components: { HeaderNavigation },
   name: "App",
 
   data: () => ({}),

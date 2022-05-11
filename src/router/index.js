@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
+import ProductView from "../views/ProductView.vue";
 import ErrorView from "../views/ErrorView.vue";
 import i18n from "../locales/index";
-import App from "../App.vue";
+// import App from "../App.vue";
 
 Vue.use(VueRouter);
 
@@ -15,18 +15,18 @@ const routes = [
   },
   {
     path: "/:locale(en|tr)",
-    name: "Home",
-    component: App,
+    component: {
+      template: "<router-view />",
+    },
     children: [
       {
         path: "",
-        name: "Home",
         component: HomeView,
       },
       {
-        path: "about",
-        name: "About",
-        component: AboutView,
+        path: "products/:id",
+        component: ProductView,
+        name: "product",
       },
     ],
   },

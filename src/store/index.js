@@ -6,27 +6,66 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    productsEn: [],
-    productsTr: [],
+    products: [],
+    productsToDisplay: [],
+    pagination: {
+      page: 1,
+      total: 0,
+      rowsPerPage: 3,
+    },
   },
   getters: {
-    getProductsEn: (state) => state.productsEn,
-    getProductsTr: (state) => state.productsTr,
+    getProducts: (state) => state.products,
+    getProductsToDisplay: (state) => state.productsToDisplay,
   },
   mutations: {
-    setProductsEn(state, products) {
-      state.productsEn = products;
+    setProducts(state, products) {
+      state.products = products.data;
     },
-    setProductsTr(state, products) {
-      state.productsTr = products;
+    setProductsToDisplay(state) {
+      let clone = JSON.parse(JSON.stringify(state.products));
+      let startFrom =
+        state.pagination.page * state.pagination.rowsPerPage -
+        state.pagination.rowsPerPage;
+      state.productsToDisplay = clone.splice(
+        startFrom,
+        state.pagination.rowsPerPage
+      );
+    },
+    setPage(state, page) {
+      state.pagination.page = page;
+    },
+    setTotal(state) {
+      state.pagination.total = state.products.length;
+    },
+    getInfiniteData(state) {
+      let clone = JSON.parse(JSON.stringify(state.products));
+      state.pagination.page++;
+      let startFrom =
+        state.pagination.page * state.pagination.rowsPerPage -
+        state.pagination.rowsPerPage;
+      clone.forEach((product, index) => {
+        if (
+          index >= startFrom &&
+          index < startFrom + state.pagination.rowsPerPage
+        ) {
+          state.productsToDisplay.push(product);
+        }
+      });
     },
   },
   actions: {
-    async getProductsEn({ commit }) {
-      commit("setProductsEn", await Product.getProductsEn());
+    async getProductsApi({ commit }) {
+      commit("setProducts", await Product.getProducts());
+      commit("setTotal");
+      commit("setProductsToDisplay");
     },
-    async getProductsTr({ commit }) {
-      commit("setProductsTr", await Product.getProductsTr());
+    setPage({ commit }, page) {
+      commit("setPage", page);
+      commit("setProductsToDisplay");
+    },
+    getInfiniteData({ commit }) {
+      commit("getInfiniteData");
     },
   },
 });

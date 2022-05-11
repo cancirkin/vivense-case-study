@@ -1,5 +1,5 @@
 export default {
-  message: {
-    hello: "hello",
+  header: {
+    title: "Product Listing Application",
   },
 };
