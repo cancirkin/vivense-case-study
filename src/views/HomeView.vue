@@ -74,7 +74,6 @@ export default {
       window.addEventListener("scroll", () => {
         this.onScroll();
       });
-      console.log("mobile");
     }
   },
 };
