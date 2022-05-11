@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app color="white" flat elevation="1">
     <v-container class="py-0 fill-height">
-      <span>{{ $t("header.title") }}</span>
+      <router-link class="header-title" to="/">{{
+        $t("header.title")
+      }}</router-link>
 
       <v-spacer></v-spacer>
 
@@ -17,5 +19,10 @@ export default {
   methods: {},
 };
 </script>
-
-<style></style>
+<style scoped>
+.header-title {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+</style>

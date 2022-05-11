@@ -12,7 +12,5 @@ import HeaderNavigation from "./components/HeaderNavigation.vue";
 export default {
   components: { HeaderNavigation },
   name: "App",
-
-  data: () => ({}),
 };
 </script>
