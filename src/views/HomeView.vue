@@ -44,7 +44,7 @@ export default {
       }
     }, 500),
     getProductForInfiniteScroll() {
-      this.$store.dispatch("setInfiniteData");
+      this.$store.commit("SET_INFINITE_DATA");
     },
   },
   computed: {

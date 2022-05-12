@@ -64,8 +64,5 @@ export default new Vuex.Store({
       commit("SET_PAGE", page);
       commit("SET_PRODUCTS_TO_DISPLAY");
     },
-    setInfiniteData({ commit }) {
-      commit("SET_INFINITE_DATA");
-    },
   },
 });

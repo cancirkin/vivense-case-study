@@ -4,8 +4,10 @@
 
     <v-card-text>{{ product.desc }}</v-card-text>
 
-    <v-card-text>
-      <div class="my-4 text-subtitle-1">{{ product.price + " TL" }}</div>
+    <v-card-text v-if="product.price">
+      <div class="my-4 text-subtitle-1">
+        {{ product.price | PriceFormat }} TL
+      </div>
     </v-card-text>
   </v-card>
 </template>

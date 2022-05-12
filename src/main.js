@@ -4,7 +4,9 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import i18n from "./locales";
+import filter from "./plugins/filter";
 
+Vue.use(filter);
 Vue.config.productionTip = false;
 
 new Vue({
