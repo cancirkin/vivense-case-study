@@ -19,10 +19,10 @@ export default new Vuex.Store({
     getProductsToDisplay: (state) => state.productsToDisplay,
   },
   mutations: {
-    setProducts(state, products) {
+    SET_PRODUCTS(state, products) {
       state.products = products.data;
     },
-    setProductsToDisplay(state) {
+    SET_PRODUCTS_TO_DISPLAY(state) {
       let clone = JSON.parse(JSON.stringify(state.products));
       let startFrom =
         state.pagination.page * state.pagination.rowsPerPage -
@@ -32,13 +32,13 @@ export default new Vuex.Store({
         state.pagination.rowsPerPage
       );
     },
-    setPage(state, page) {
+    SET_PAGE(state, page) {
       state.pagination.page = page;
     },
-    setTotal(state) {
+    SET_TOTAL(state) {
       state.pagination.total = state.products.length;
     },
-    getInfiniteData(state) {
+    SET_INFINITE_DATA(state) {
       let clone = JSON.parse(JSON.stringify(state.products));
       state.pagination.page++;
       let startFrom =
@@ -56,16 +56,16 @@ export default new Vuex.Store({
   },
   actions: {
     async getProductsApi({ commit }) {
-      commit("setProducts", await Product.getProducts());
-      commit("setTotal");
-      commit("setProductsToDisplay");
+      commit("SET_PRODUCTS", await Product.getProducts());
+      commit("SET_TOTAL");
+      commit("SET_PRODUCTS_TO_DISPLAY");
     },
     setPage({ commit }, page) {
-      commit("setPage", page);
-      commit("setProductsToDisplay");
+      commit("SET_PAGE", page);
+      commit("SET_PRODUCTS_TO_DISPLAY");
     },
-    getInfiniteData({ commit }) {
-      commit("getInfiniteData");
+    setInfiniteData({ commit }) {
+      commit("SET_INFINITE_DATA");
     },
   },
 });

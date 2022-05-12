@@ -46,7 +46,7 @@ export default {
       }
     }, 500),
     getProductForInfiniteScroll() {
-      this.$store.dispatch("getInfiniteData");
+      this.$store.dispatch("setInfiniteData");
     },
     detectDevice() {
       const ua = navigator.userAgent;
