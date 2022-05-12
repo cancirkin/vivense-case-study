@@ -53,7 +53,15 @@ export default {
     }),
   },
   async created() {
-    await this.$store.dispatch("getProductsApi");
+    //Url'deki sayfa parametresi elle değiştirilirse hata sayfasına yönlendirdim.
+    if (!Number(this.$route.params.page)) {
+      this.$router.push({ name: "Error" });
+      return;
+    }
+    await this.$store.dispatch(
+      "fetchProducts",
+      Number(this.$route.params.page)
+    );
     if (this.device === "mobile") {
       window.addEventListener("scroll", () => {
         this.onScroll();

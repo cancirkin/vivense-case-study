@@ -11,17 +11,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: `/${i18n.locale}`,
+    redirect: `/${i18n.locale}/1`,
   },
   {
     path: "/:locale(en|tr)",
+    redirect: "/:locale/1",
     component: {
       template: "<router-view />",
     },
     children: [
       {
-        path: "",
+        path: ":page",
         component: HomeView,
+        name: "home",
       },
       {
         path: "products/:id",

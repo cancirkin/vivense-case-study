@@ -23,6 +23,8 @@ export default new Vuex.Store({
       state.products = products.data;
     },
     SET_PRODUCTS_TO_DISPLAY(state) {
+      // Backend'in olduğu durumlarda ürünleri çekmek için request atarken skip, take veya page gibi parametreler kullanılır.
+      // Burada backend olmadığı için bana gelen ürünleri klonlayarak pagination oluşturuyorum.
       let clone = JSON.parse(JSON.stringify(state.products));
       let startFrom =
         state.pagination.page * state.pagination.rowsPerPage -
@@ -33,7 +35,15 @@ export default new Vuex.Store({
       );
     },
     SET_PAGE(state, page) {
-      state.pagination.page = page;
+      //Eğer Url'den total sayfa sayısından daha büyük bir rakam girilirse
+      //burada manuel olarak ayarlayıp son sayfayı gösterdim.
+      if (page > state.pagination.total) {
+        state.pagination.page = Math.ceil(
+          state.pagination.total / state.pagination.rowsPerPage
+        );
+      } else {
+        state.pagination.page = page;
+      }
     },
     SET_TOTAL(state) {
       state.pagination.total = state.products.length;
@@ -55,9 +65,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getProductsApi({ commit }) {
+    async fetchProducts({ commit }, page) {
       commit("SET_PRODUCTS", await Product.getProducts());
       commit("SET_TOTAL");
+      commit("SET_PAGE", page);
       commit("SET_PRODUCTS_TO_DISPLAY");
     },
     setPage({ commit }, page) {

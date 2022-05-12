@@ -17,6 +17,10 @@ export default {
   },
   methods: {
     changePage(e) {
+      this.$router.push({
+        name: "home",
+        params: { page: e },
+      });
       this.$store.dispatch("setPage", e);
     },
   },

@@ -17,7 +17,7 @@ export default {
         seperatedRoute[1] = this.$i18n.locale;
         this.$router.push(seperatedRoute.join("/"));
       } else {
-        this.$router.push(`/${this.$i18n.locale}`);
+        this.$router.push(`/`);
       }
       //Ürünleri mockapi'de tr ve en olarak ayrı endpointlerde tuttuğum için burada sayfayı reload edip az önce setlediğim
       //dile göre ürünleri tekrar çekiyorum.

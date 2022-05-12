@@ -33,7 +33,7 @@ export default {
   async mounted() {
     //Sayfa yenilendiğinde store datası kaybolacağı için burada tekrar ürünleri çekiyorum ve
     //url'deki parametreye göre filtreleyip seçilen ürünü buluyorum.
-    await this.$store.dispatch("getProductsApi");
+    await this.$store.dispatch("fetchProducts");
     this.product = this.products.find(
       (product) => product.id === this.$route.params.id
     );
