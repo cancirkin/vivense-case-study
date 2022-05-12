@@ -27,14 +27,12 @@ import ProductCard from "@/components/ProductCard.vue";
 import { mapGetters } from "vuex";
 import ProductPagination from "@/components/ProductPagination.vue";
 import debounce from "debounce";
+import device from "../mixins/device.js";
 export default {
   components: { ProductCard, ProductPagination },
   name: "HomePage",
-  data() {
-    return {
-      device: "",
-    };
-  },
+  mixins: [device],
+
   methods: {
     onScroll: debounce(function () {
       let wrap = document.querySelector(".infiniteSection");
@@ -48,19 +46,6 @@ export default {
     getProductForInfiniteScroll() {
       this.$store.dispatch("setInfiniteData");
     },
-    detectDevice() {
-      const ua = navigator.userAgent;
-      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-        return "tablet";
-      } else if (
-        /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
-          ua
-        )
-      ) {
-        return "mobile";
-      }
-      return "desktop";
-    },
   },
   computed: {
     ...mapGetters({
@@ -68,7 +53,6 @@ export default {
     }),
   },
   async created() {
-    this.device = this.detectDevice();
     await this.$store.dispatch("getProductsApi");
     if (this.device === "mobile") {
       window.addEventListener("scroll", () => {
