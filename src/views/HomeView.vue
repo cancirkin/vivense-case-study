@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <v-col v-if="device !== 'mobile'" class="d-flex flex-wrap" cols="12">
+    <v-col
+      v-if="device !== 'mobile'"
+      class="d-flex flex-wrap flex-column"
+      cols="12"
+    >
       <v-row>
         <product-card
           v-for="product in products"
